@@ -36,13 +36,7 @@ streamlit.dataframe(fruityvice_normalized)
 
 import snowflake.connector
 
-# Initialize connection.
-# Uses st.experimental_singleton to only run once.
-@streamlit.experimental_singleton
-def init_connection():
-    return snowflake.connector.connect(**streamlit.secrets["snowflake"])
-
-conn = init_connection()
+# Initialize connection
 
 my_cnx = snowflake.connector.connect(**streamlit.secrets["snowflake"])
 my_cur = my_cnx.cursor()
@@ -50,3 +44,6 @@ my_cur.execute("select * from fruit_load_list")
 my_data_row = my_cur.fetchall()
 streamlit.header("The fruit load list contains:")
 streamlit.dataframe(my_data_row)
+
+add_my_fruit = streamlit.text_input('What fruits would you like to add?', 'Jackfruit')
+

@@ -1,6 +1,8 @@
 import streamlit
 import pandas
 import requests
+import snowflake.connector
+from urllib.error Import URLError
 
 streamlit.title('My Mom\'s New Healthy Diner')
 
@@ -33,8 +35,6 @@ fruitvice_reponse = requests.get("https://fruityvice.com/api/fruit/" + fruit_cho
 fruityvice_normalized = pandas.json_normalize(fruitvice_reponse.json())
 # output it to the screen as table
 streamlit.dataframe(fruityvice_normalized)
-
-import snowflake.connector
 
 streamlit.stop()
 
